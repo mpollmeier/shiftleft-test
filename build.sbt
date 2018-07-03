@@ -1,13 +1,11 @@
 name := "shiftleft etst"
 
-scalaVersion := "2.12.2"
+scalaVersion := "2.12.6"
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.3" % Test
 )
 
 scalacOptions ++= Seq("-deprecation", "-feature")
-scalafmtTestOnCompile in ThisBuild := true
-scalafmtFailTest in ThisBuild := false
 fork in Test := true
 updateOptions := updateOptions.value.withLatestSnapshots(false)
 updateOptions := updateOptions.value.withCachedResolution(true)
@@ -30,3 +28,24 @@ publishTo := {
     Some("releases"  at jfrog + "libs-release-local")
 }
 publishMavenStyle := true
+
+lazy val docs = project
+  .in(file("docs"))
+  .enablePlugins(MicrositesPlugin)
+  .settings(
+    micrositeGitterChannel := false,
+    micrositeShareOnSocial := false,
+    micrositeGithubLinks := false,
+    micrositeHighlightTheme := "monokai",
+    micrositeHighlightTheme   := "color-brewer",
+    // micrositePalette := Map(
+    //   "brand-primary"     -> "#E35D31",
+    //   "brand-secondary"   -> "#B24916",
+    //   "brand-tertiary"    -> "#B24916",
+    //   "gray-dark"         -> "#453E46",
+    //   "gray"              -> "#837F84",
+    //   "gray-light"        -> "#E3E2E3",
+    //   "gray-lighter"      -> "#F4F3F4",
+    //   "white-color"       -> "#FFFFFF"
+    // ),
+  )
